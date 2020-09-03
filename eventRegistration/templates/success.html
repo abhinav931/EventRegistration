@@ -1,0 +1,84 @@
+<!--THIS HTML FILE REPRESENT SUCCESS PAGE  -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Event Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!--BOOTSTRAP CDN LINK FOR CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  
+  <!--STYLES LINK -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  
+  <!--JQUERY LINK-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  
+  <!--BOOTSTRAP CDN LINK FOR JS-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+
+    <!-- SUCCESS MODAL STARTS HERE -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                     
+                      <!--MODAL HEADER STARTS HERE-->
+                      <div class="modal-header">
+                             <h5 class="modal-title modal-heading" id="exampleModalLongTitle">Success</h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                             </button>
+                      </div>
+                      <!--MODAL HEADER ENDS HERE-->
+                      
+                      <!--MODAL BODY STARTS HERE-->
+                      <div class="modal-body">
+                            <p style="color: #f57f3b;">Congratulations!! You are successfully registered.</p>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p><strong style="color: deepskyblue;">Your Registration Id is:</strong></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        <strong style="color: deepskyblue;" id="reg-id">
+                                            {{registerId}}
+                                        </strong>
+                                    </p>
+                                </div>
+                            </div>
+                      </div>
+                      <!--MODAL BODY ENDS HERE-->
+                      
+                      <!--MODAL FOOTER STARTS HERE-->
+                      <div class="modal-footer">
+                        <a href="{% url 'register' %}" class="return-home">Return to Home</a>
+                      </div>
+                      <!--MODAL BODY ENDS HERE-->
+                </div>
+         </div>
+    </div>
+    <!-- SUCCESS MODAL ENDS HERE -->
+    
+    
+</body>
+
+<!--JAVASCRIPT CODE STARTS HERE-->
+<script>
+    
+    //JQUERY EVENT METHOD FOR LOADING SUCCESS MODAL ON SUCCESS PAGE LOADING
+    $(document).ready(function(){
+        $("#exampleModalCenter").modal('show');
+        $("body").css("background-color", "#ffd3b3");
+
+    });
+       
+</script>
+<!--JAVASCRIPT CODE ENDS HERE-->
+
+</html>

@@ -1,0 +1,161 @@
+<!--THIS FILE REPRESENT REGISTRATION FORM AND PREVIEW MODAL-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--PREVIEW MODAL STARTS HERE-->
+<div class="modal fade preview-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm " role="document" style="margin-left: 0; ">
+    <div class="modal-content">
+       
+       <!--PREVIEW MODAL HEADER STARTS HERE-->
+       <div class="modal-header">
+       
+        <!-- MODAL HEADING STARTS HERE-->
+            <h5 class="modal-title modal-heading" id="exampleModalLongTitle">Preview</h5>
+        <!-- MODAL HEADING ENDS HERE-->
+           
+        <!--CROSS SYMBOL ON MODAL TOP RIGHT CORNER STARTS HERE-->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        <!--CROSS SYMBOL ON MODAL TOP RIGHT CORNER ENDS HERE-->  
+        
+       </div>
+      <!--PREVIEW MODAL HEADER ENDS HERE-->
+       
+      <!--PREVIEW MODAL BODY STARTS HERE-->
+      <div class="modal-body">
+         <div class="row">
+             <div class="col-sm-6 preview-field">Fullname</div>
+             <div class="col-sm-6" id="full_name"></div>
+         </div>
+         <div class="row">
+             <div class="col-sm-6 preview-field">e-mail</div>
+             <div class="col-sm-6"  id="e_mail"></div>
+         </div>
+         <div class="row">
+             <div class="col-sm-6 preview-field">Mobile no.</div>
+             <div class="col-sm-6" id="mobile_no"></div>
+         </div>
+         <div class="row">
+             <div class="col-sm-6 preview-field">No. of Tickets</div>
+             <div class="col-sm-6" id="no_of_tickets"></div>
+         </div>
+         <div class="row">
+             <div class="col-sm-6 preview-field">Registration type</div>
+             <div class="col-sm-6" id="registration_type"></div>
+         </div>
+         <div class="row">
+             <div class="col-sm-12 preview-field">Idcard</div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12">
+                <p style="color: deepskyblue; font-style: italic;">Click on image to enlarge it.</p>
+                <img class = 'responsive' id="card" src="#" alt="your image" />
+                
+                <div id="myModal" class="pre-modal">
+
+                      <!-- The Close Button -->
+                      <span class="close" id="close-symbol">&times;</span>
+
+                      <!-- Modal Content (The Image) -->
+                      <img class="modal-img" id="img01">
+
+                      <!-- Modal Caption (Image Text) -->
+                      <div id="caption"></div>
+                </div>
+                
+            </div>
+         </div>
+      </div>
+      <!--PREVIEW MODAL BODY ENDS HERE-->
+      
+      <!--PREVIEW MODAL FOOTER STARTS HERE-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary return-btn" data-dismiss="modal">Return</button>
+      </div>
+      <!--PREVIEW MODAL FOOTER ENDS HERE-->
+      
+    </div>
+  </div>
+</div>
+<!--PREVIEW MODAL ENDS HERE-->
+
+<!--CONTAINER FOR EVENT REGISTRATION FORM STARTS HERE-->
+<div class="container" style="margin-top:30px">
+  <div class="row">
+      <div class="col-sm-12">
+         
+          <!--EVENT REGISTRATION FORM HEADING STARTS HERE-->
+          <div class="heading">
+              <h2 id="register-heading" style="margin: 2%;">Register here</h2>
+          </div>
+          <!--EVENT REGISTRATION FORM HEADING ENDS HERE-->
+          
+          <!--EVENT REGISTRATION FORM STARTS HERE-->
+          <form action="{% url 'register' %}" method="post" enctype="multipart/form-data" style="margin: 2%;">
+              
+              {% csrf_token %}
+              
+              <!--DIVISION FOR GENERATING ERROR MESSAGES STARTS HERE-->
+              <div class="errors" style="color: red;">
+              {{ form.errors }}
+              {% for message in messages %}
+                 <p>*{{message}}</p>
+              {% endfor %}
+              
+              </div>
+              <!--DIVISION FOR GENERATING ERROR MESSAGES ENDS HERE-->
+              
+              <!--REGISTRATION FORM FIELDS STARTS HERE-->
+              <div class="form-group">
+                <label for="fullname">Full name:</label>
+                {{form.fullname}}
+              </div>
+              <div class="form-group">
+                <label for="email">Email address:</label>
+                {{form.emailId}}
+              </div>
+              <div class="form-group">
+                <label for="mobile">Mobile no.:</label>
+                {{form.mobileNumber}}
+              </div>
+              <div class="form-group">
+                 <label for="idcard">ID card:</label>
+                 {{form.idCard}}
+                 <p style="color: deepskyblue;">*(only .png and .jpg are allowed)</p>
+              </div>
+              <div class="form-group">
+                  <label for="numberoftickets">No. of tickets:</label>
+                  {{form.numberOfTickets}}
+                  <p style="color: deepskyblue;">*(If not provided, by default it'll be taken as 1)</p>
+              </div>
+              <div class="registration-type">
+                   <label for="registrationtype">
+                     Registration type:
+                   </label>
+                   {{form.registrationType}}
+              </div>
+              <!--REGISTRATION FORM FIELDS ENDS HERE-->
+              
+              <!--SUBMIT BUTTON STARTS HERE-->
+              <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+              <!--SUBMIT BUTTON ENDS HERE-->
+              
+              <!--PREVIEW BUTTON STARTS HERE-->
+              <button type="button" class="btn btn-primary preview-btn" data-toggle="modal" data-target="#exampleModal" onclick="myPreview()">
+              Preview
+              </button>
+               <!--PREVIEW BUTTON ENDS HERE-->
+              
+            </form>
+          <!--EVENT REGISTRATION FORM ENDS HERE-->
+          
+      </div>
+  </div>
+</div>
+<!--CONTAINER FOR EVENT REGISTRATION FORM ENDS HERE-->
+
+{% endblock content %}

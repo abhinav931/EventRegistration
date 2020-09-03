@@ -1,0 +1,160 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+<!-- Override extrahead to add Chart.js -->
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!--JAVASCRIPT CODE STARTS HERE-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+   const ctx = document.getElementById('myChart').getContext('2d');
+ 
+   const chartData = {{ chart_data | safe }}
+
+   //GETTING FREQUENCY ON REGISTRATION TYPES TO BE RENDERED ON CHART
+   var self = chartData[0];
+   var group = chartData[1];
+   var corporate = chartData[2];
+   var others = chartData[3];
+                          
+   document.getElementById('self').innerHTML = self;
+   document.getElementById('group').innerHTML = group;
+   document.getElementById('corporate').innerHTML = corporate;
+   document.getElementById('others').innerHTML = others;
+   document.getElementById('no-of-records').innerHTML = self + group + corporate + others;
+    
+    // RENDER THE CHART
+    const chart = new Chart(ctx, {
+     type: 'bar',
+     data: { 
+     labels: ["Self", "Group"  , "Corporate", "Others"], 
+     datasets: [ 
+      { label: 'Registration types', 
+        data: chartData, 
+        backgroundColor :['rgba(255, 99, 132, 0.2)', 
+                'rgba(255, 99, 132, 0.2)', 
+                'rgba(255, 99, 132, 0.2)', 
+                'rgba(255, 99, 132, 0.2)'
+                 
+], 
+  
+borderColor: [ 
+                'rgba(255, 99, 132, 0.2)', 
+                'rgba(255, 99, 132, 0.2)', 
+                'rgba(255, 99, 132, 0.2)', 
+                'rgba(255, 99, 132, 0.2)'
+            ], 
+borderWidth : 1 
+      } 
+    ] 
+  },
+    options: { 
+        scales: { 
+            yAxes: [{ 
+                ticks: { 
+                    beginAtZero:true,
+                    stepSize: 1,
+                } 
+            }] 
+        } 
+    }
+  });
+});
+
+//FUNCTION EXECUTING EVERY 3 SECONDS TO SEE WHETHER NEW RECORD INSERTED OR NOT
+//AJAX CODE STARTS HERE
+setInterval(function(){ 
+            jQuery.ajax({
+                type:"GET",
+                url: '{% url "update_tables" %}',
+                data: {},
+                datatype: 'json',
+                success: function(data){
+                    if(data.newRecord){
+                        newElement = document.createElement('strong');
+                        newElement.style.color = 'deepskyblue';
+                        textElement = document.createTextNode('New record is added -> ' + data.regId + ', ' + data.regType);
+                        newElement.appendChild(textElement);
+                        newElement.appendChild(document.createElement('br'));
+                        document.getElementById('record-added').appendChild(newElement);
+                        
+                       
+                        document.getElementById('no-of-records').innerHTML = data.lengthData;
+                        
+                        
+                        data.newRecord = false;
+                    }
+                    
+                    
+                }
+            });
+}, 3000);
+//AJAX CODE ENDS HERE
+
+</script>
+<!--JAVASCRIPT CODE ENDS HERE-->
+
+{% endblock %}
+
+{% block content %}
+<!-- Render our chart -->
+<hr size='4' noshade>
+<!--DISPLAYING NEW RECORD MESSAGE-->
+<div>
+    <p id="record-added">
+        
+        
+    </p> 
+</div>
+<!--DISPLAYING NEW RECORD MESSAGE ENDS HERE-->
+
+<hr size='4' noshade>
+<hr size='4' noshade>
+
+<!--DISPLAYING MOST RECENT COUNT OF RECORDS STARTS HERE-->
+<div class="records-msg">
+    <p>
+        <strong>Recent Count of records: </strong>
+        <strong id="no-of-records" style="color: deepskyblue;"></strong>
+    </p> <br>
+</div>
+<hr size='4' noshade>
+<h3  style="margin: 2%;">Frequency of each registration type</h3>
+<table class="table table-striped "  style="margin: 4%;">
+    <thead>
+        <tr>
+            <th>Self</th>
+            <th>Group</th>
+            <th>Corporate</th>
+            <th>Others</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="self"></td>
+            <td id="group"></td>
+            <td id="corporate"></td>
+            <td id="others"></td>
+        </tr>
+    </tbody>
+</table>
+<!--DISPLAYING MOST RECENT COUNT OF RECORDS ENDS HERE -->
+
+<!--RENDERING CHART.JS-->
+<h3 style="margin: 2%;">Graph representing registration types</h3>
+<div style="width: 80%;">
+  <canvas style="margin-bottom: 30px; width: 60%; height: 50%;" id="myChart"></canvas>
+</div>
+<!--RENDERING CHART.JS ENDS HERE-->
+
+<!--SEARCH FUNCTIONALITY BY REGISTRATION TYPE AND REGISTRATION NO.-->
+<h3 style="margin: 2%;">Search by registration type and registrationNo</h3>
+<!--SEARCH FUNCTIONALITY BY REGISTRATION TYPE AND REGISTRATION NO. ENDS HERE-->
+
+<!-- RENDERING REST OF THE CHANGELIST VIEW -->
+{{ block.super }}
+{% endblock %}

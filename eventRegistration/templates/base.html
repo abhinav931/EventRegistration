@@ -1,0 +1,200 @@
+<!--THIS FILE IS BASE FILE FOR OTHER TEMPLATES-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Event Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!--  STYLES LINK-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  
+<!--  JQUERY LINK-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  
+
+ <!--  BOOTSTRAP CDN LINK-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  
+  
+<!--  GOOGLE FONTS LINKS-->
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Shadow&family=Quintessential&family=Satisfy&family=Vibur&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Shadow&family=Quintessential&family=Satisfy&family=Slabo+27px&family=Vibur&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+
+    <!--HEADER STARTS HERE-->
+    <div class="jumbotron text-center header" style="margin-bottom:0">
+      <h1 id="name-of-site">Event Registration</h1>
+      <p id="side-line">With the hope to make event registration smooth and hassle-free.</p> 
+    </div>
+    <!--HEADER ENDS HERE-->
+
+    <!-- NAVBAR STARTS HERE-->
+    <nav class="navbar navbar-expand-sm  navbar-dark">
+  
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">  
+                
+                <!--HOW TO USE- MODAL STARTS HERE-->
+            <li class="nav-item">
+                <!-- Button trigger modal -->
+               <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalLong">
+                      How to use??
+               </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                     <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title modal-heading" id="exampleModalLongTitle">Rules are: </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="rules-list">
+                    <ul>
+                        <li>All fields are mandatory</li>
+                        <li>You will be provided preview screen</li>
+                        <li>Id cards should be in .png or .jpeg format</li>
+                        <li>If submission would be successful, you will get registration id</li>
+                        <li>Try to keep registration id confidential</li>
+                    </ul>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary return-btn" data-dismiss="modal">Return</button>
+              </div>
+            </div>
+                     </div>
+                </div>
+            </li>
+                <!--HOW TO USE- MODAL ENDS HERE-->
+                
+                <!--ABOUT MODAL STARTS HERE-->
+            <li class="nav-item">
+                 <!-- Button trigger modal -->
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalAbout">
+                  About
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalAbout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title modal-heading" id="exampleModalLongTitle">About</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>
+                            This website is developed by only single person. <br>
+                            Name of developer is: <strong>Abhinav Verma</strong>
+                        </p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary return-btn" data-dismiss="modal">Return</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             </li>
+                <!--ABOUT MODAL ENDS HERE-->
+                
+        </ul>
+      </div>  
+    </nav>
+    <!--NAVBAR ENDS HERE-->
+    
+    <!--WRAPPER FOR OTHER HTML FILE STARTS HERE-->
+        {% block content %}
+        {% endblock content %}
+    <!--WRAPPER FOR OTHER HTML FILE ENDS HERE-->
+    
+    <!--FOOTER STARTS HERE-->
+    <div class="jumbotron text-center footer" style="margin-bottom:0">
+  <p id="footer-line">Developed by <strong>AbhinavVerma</strong> &copy; 2020  </p>
+</div>
+    <!--FOOTER ENDS HERE-->
+    
+    <!--JAVASCRIPT CODE GOES HERE-->
+   <script>
+       
+    //FUNCTION TO GENERATE PREVIEW MODAL- STARTS HERE
+    function myPreview(){
+        document.getElementById('full_name').innerHTML = document.getElementById('fullname').value;
+        
+        document.getElementById('e_mail').innerHTML = document.getElementById('email').value;
+        
+        document.getElementById('mobile_no').innerHTML = document.getElementById('mobilenumber').value;
+        
+        document.getElementById('no_of_tickets').innerHTML = document.getElementById('tickets').value;
+        
+        function radioVal() { 
+            var elements = document.getElementsByName('registrationType'); 
+            console.log(elements)
+            for(i = 0; i < elements.length; i++) { 
+                if(elements[i].checked) 
+                    document.getElementById('registration_type').innerHTML = elements[i].value;
+
+            } 
+        } 
+        radioVal();
+    }
+       
+       
+    //FUNCTION TO GET PATH OF UPLOADED IMAGE ON CLIENT'S DEVICE
+    function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                  $('#card').attr('src', e.target.result);
+                  
+                }
+
+                reader.readAsDataURL(input.files[0]);
+              }
+            } 
+       
+       
+    //JQUERY EVENT METHOD FOR APPLYING IMAGE TO MODAL
+    $("#id_idCard").change(function() {
+              readURL(this);
+        });
+    
+    
+    //GENERATING FULL SCREEN TO SEE ID CARD IMAGE
+    var modal = document.getElementById("myModal");
+    var img = document.getElementById("card");
+    var modalImg = document.getElementById("img01");
+
+    img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close-symbol");
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+    
+  </script>
+    <!--JAVASCRIPT CODE ENDS HERE-->
+    
+</body>
+</html>

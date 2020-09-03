@@ -1,0 +1,158 @@
+body{
+    background-color: #ffd3b3;
+}
+
+.header{
+    background-color: #ffd3b3;
+    
+}
+
+.header #name-of-site{
+    font-family: 'Slabo 27px', serif;
+    color: #f57f3b;
+    font-weight: bold;
+}
+
+.header #side-line{
+    font-family: cursive;
+    color: white;
+    font-size: 1.4em;
+}
+
+nav{
+    background-color: #f57f3b;
+}
+
+.navbar .nav-item .btn{
+    font-family: cursive;
+    color: white;
+    font-size: 1.4em;
+}
+
+.navbar .nav-item #home{
+    font-family: cursive;
+    color: white;
+    font-size: 1.4em;
+}
+
+
+
+.heading #register-heading{
+    font-family: 'Slabo 27px', serif;
+    color: #f57f3b;
+    font-weight: bolder;
+}
+
+
+
+.form-group label{
+    font-family: cursive;
+    color: coral;
+}
+
+.form-group input{
+    font-weight: 600;
+   
+}
+
+.registration-type label{
+    font-family: cursive;
+    color: coral;
+}
+
+.submit-btn, .preview-btn{
+    background-color: #f57f3b;
+}
+
+.footer{
+     background-color: #f57f3b;
+     padding: 2%;
+}
+
+#footer-line{
+    font-family: cursive;
+    color: white;
+    font-size: 1.4em;
+    
+}
+
+.modal-heading{
+    font-family: 'Slabo 27px', serif;
+    color: #f57f3b;
+    font-weight: bolder;
+}
+#exampleModal{
+    position:fixed;
+    left:0;
+    width:600px;
+}
+
+.return-btn{
+    background-color: #f57f3b; 
+}
+
+.preview-field{
+    font-family: 'Slabo 27px', serif;
+    color: #f57f3b; 
+}
+
+.modal-footer a{
+    background-color: #f57f3b;
+    font-family: 'Slabo 27px', serif;
+    color: white; 
+    display: block;
+    padding: 2%;
+    border-radius: 5%;
+}
+
+
+.responsive{
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+@media only screen and (max-width: 700px){
+  .responsive {
+    width: 100%;
+  }
+}
+
+.pre-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+
+.modal-img {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+@media only screen{
+  #exampleModal {
+    width: 100%;
+  }
+}
