@@ -1,6 +1,6 @@
 # DJANGO WEBSITE FOR EVENT REGISTRATION
 
-Event registration website made using django. *Django + ChartJs* integration 
+Event registration website made using django. *Django-admin + ChartJs* integration 
 
 ## TECH STACK USED
 Django Stack: Django, python and SQLite3 as Database
